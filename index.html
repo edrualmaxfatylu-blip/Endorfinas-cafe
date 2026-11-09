@@ -8,7 +8,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #11070a; /* Fondo ultra oscuro */
+            background-color: #11070a; 
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -18,14 +18,13 @@
         .app-container {
             width: 100%;
             max-width: 430px;
-            background-color: #1a0b12; /* Color de la app estilo dark mode */
+            background-color: #1a0b12; 
             min-height: 100vh;
             position: relative;
             padding-bottom: 40px;
             box-shadow: 0 0 25px rgba(0,0,0,0.8);
         }
         
-        /* Banner con degradado oscuro hacia abajo */
         .banner {
             width: 100%;
             height: 190px;
@@ -37,7 +36,6 @@
             -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
         }
 
-        /* Logo en texto */
         .logo-wrapper {
             position: relative;
             margin-top: -85px;
@@ -73,7 +71,6 @@
             margin-top: 2px;
         }
 
-        /* Textos de encabezado */
         .header-text {
             text-align: center;
             margin-top: 15px;
@@ -92,7 +89,6 @@
 
         .content { padding: 25px 22px; }
 
-        /* Tarjeta Inteligente de Mesa */
         .table-card {
             background-color: #29111b;
             border-radius: 16px;
@@ -131,7 +127,6 @@
             line-height: 1.4;
         }
 
-        /* Separador de Sección Punteado */
         .section-title {
             text-align: center;
             color: #d84b72;
@@ -149,28 +144,38 @@
             border-bottom: 1px dashed #6b2a40;
         }
 
-        /* Botones Rectangulares */
+        /* Botones de Menú y WhatsApp adaptados a tu referencia */
         .btn-main {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
             width: 100%;
-            padding: 18px;
+            padding: 16px;
             border-radius: 14px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.05rem;
             margin-bottom: 14px;
             transition: transform 0.2s;
             border: none;
+            text-align: center;
         }
         .btn-main:active { transform: scale(0.98); }
         
-        .btn-menu { background-color: #6b1535; color: white; }
-        .btn-whatsapp { background-color: #1f9e4e; color: white; } /* Un verde más sobrio para modo oscuro */
+        .btn-menu { 
+            background-color: #a6204c; /* Rosa/Vino vibrante de la referencia */
+            color: white; 
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        
+        .btn-whatsapp { 
+            background: linear-gradient(180deg, #32c759, #248a3d); /* Verde WhatsApp */
+            color: white; 
+            flex-direction: column;
+            gap: 4px;
+        }
+        .btn-whatsapp .title { font-size: 1.1rem; font-weight: 700; }
+        .btn-whatsapp .subtitle { font-size: 0.8rem; font-weight: 400; opacity: 0.9; }
 
-        /* Transferencia Bancaria Oscura */
         .bank-box {
             background-color: #29111b;
             border: 1px dashed #d84b72;
@@ -203,38 +208,51 @@
         .bank-info { font-family: monospace; font-size: 0.95rem; line-height: 1.6; color: #d1c1c5; }
         .bank-info strong { color: #ffffff; font-family: sans-serif; }
 
-        /* Cuadrícula inferior */
+        /* Cuadrícula inferior con los colores de tu referencia */
         .action-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 12px;
+            margin-top: 15px;
         }
         .action-btn {
-            background-color: #29111b;
-            border: 1px solid #3d1b28;
-            border-radius: 14px;
+            border-radius: 18px;
             padding: 16px 5px;
             text-align: center;
             text-decoration: none;
-            color: #f7e6ea;
-            font-size: 0.8rem;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 600;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
             transition: transform 0.2s;
+            line-height: 1.25;
         }
         .action-btn:active { transform: scale(0.95); }
-        .action-btn i { font-size: 1.5rem; color: #d84b72; font-style: normal; }
+        .action-btn i { font-size: 1.5rem; font-style: normal; margin-bottom: 2px; }
+        
+        /* Colores degradados exactos para los botones inferiores */
+        .btn-ubicacion { background: linear-gradient(180deg, #d84b72, #9e2349); }
+        .btn-google { background: linear-gradient(180deg, #4da1ff, #1d72f3); }
+        .btn-insta { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+        
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.75rem;
+            color: #8c767d;
+        }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <!-- Imagen superior difuminada -->
         <div class="banner"></div>
         
-        <!-- Logo en Círculo -->
         <div class="logo-wrapper">
             <div class="logo-circle">
                 <div class="logo-title">Endorfina</div>
@@ -242,14 +260,12 @@
             </div>
         </div>
 
-        <!-- Textos principales -->
         <div class="header-text">
             <h1>Endorfina chocolatería y café</h1>
             <p>Un espacio para consentirte</p>
         </div>
 
         <div class="content">
-            <!-- Tarjeta Dinámica de Mesa (Cambia con la URL y la hora) -->
             <div class="table-card">
                 <div class="table-number">
                     <span id="display-mesa">1</span>
@@ -261,16 +277,17 @@
                 </div>
             </div>
 
-            <!-- Título de sección -->
             <div class="section-title">
                 <span>☕ Menú & Pedidos</span>
             </div>
 
-            <!-- Botones Principales -->
-            <a href="https://tusitio.com/menu" class="btn-main btn-menu">📖 Ver menú digital</a>
-            <a href="https://wa.me/525611107651" class="btn-main btn-whatsapp">💬 Pedir por WhatsApp</a>
+            <!-- Botones actualizados -->
+            <a href="https://tusitio.com/menu" class="btn-main btn-menu">Ver menú digital</a>
+            <a href="https://wa.me/525611107651" class="btn-main btn-whatsapp">
+                <span class="title">Pedir desde mi mesa</span>
+                <span class="subtitle">WhatsApp · Sucursal Lago Viedma</span>
+            </a>
 
-            <!-- Recuadro Bancario Copiable -->
             <button onclick="navigator.clipboard.writeText('012180015679754088'); alert('¡CLABE copiada al portapapeles!');" class="bank-box">
                 <div class="bank-header">
                     <span>🏦 Pagar por transferencia</span>
@@ -283,41 +300,40 @@
                 </div>
             </button>
 
-            <!-- Acciones Secundarias -->
+            <!-- Cuadrícula colorida actualizada -->
             <div class="action-grid">
-                <a href="https://maps.google.com" class="action-btn">
+                <a href="https://maps.google.com" class="action-btn btn-ubicacion">
                     <i>📍</i>
-                    Ubicación y<br>sucursales
+                    <span>Ubicación y<br>sucursales</span>
                 </a>
-                <a href="https://search.google.com/local/writereview?placeid=PLACE_ID_AQUI" class="action-btn">
+                <a href="https://search.google.com/local/writereview?placeid=PLACE_ID_AQUI" class="action-btn btn-google">
                     <i>⭐</i>
-                    Reseña en<br>Google Maps
+                    <span>Califícanos<br>en Google</span>
                 </a>
-                <a href="https://instagram.com" class="action-btn">
+                <a href="https://instagram.com" class="action-btn btn-insta">
                     <i>📸</i>
-                    Nuestras<br>Redes
+                    <span>Síguenos en<br>Instagram</span>
                 </a>
+            </div>
+            
+            <div class="footer">
+                © Endorfina Chocolatería y Café | Portal digital
             </div>
         </div>
     </div>
 
-    <!-- Script de Inteligencia (Lee la URL y la hora) -->
     <script>
-        // 1. Obtiene la mesa desde la URL (ejemplo: ?mesa=3)
         const urlParams = new URLSearchParams(window.location.search);
         let numMesa = urlParams.get('mesa') || '1'; 
 
-        // 2. Coloca el número en el círculo grande
         document.getElementById('display-mesa').innerText = numMesa;
         
-        // 3. Saluda al cliente dependiendo de la hora real en México
         const hora = new Date().getHours();
         let saludo = 'Hola';
         if (hora >= 5 && hora < 12) saludo = 'Buenos días';
         else if (hora >= 12 && hora < 19) saludo = 'Buenas tardes';
         else saludo = 'Buenas noches';
 
-        // 4. Escribe el texto en la tarjeta
         document.getElementById('greeting-text').innerText = `${saludo}, mesa ${numMesa}`;
     </script>
 </body>
