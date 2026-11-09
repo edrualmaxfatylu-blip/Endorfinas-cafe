@@ -175,14 +175,12 @@
         .btn-whatsapp .title { font-size: 1.1rem; font-weight: 700; }
         .btn-whatsapp .subtitle { font-size: 0.8rem; font-weight: 400; opacity: 0.9; }
 
-        /* Acordeón de Pagos Mejorado */
+        /* Acordeón de Pagos */
         .payment-accordion {
             background-color: #29111b;
-            border: 1px solid #4a1f2f;
             border-radius: 16px;
             margin: 25px 0;
             overflow: hidden;
-            transition: border-color 0.3s;
         }
         .payment-header {
             width: 100%;
@@ -197,55 +195,97 @@
             font-size: 1.05rem;
             font-weight: bold;
         }
-        .payment-header .icon-bank { font-size: 1.4rem; margin-right: 10px; vertical-align: middle; }
         .arrow-icon {
             font-size: 1.2rem;
-            color: #d84b72;
+            color: #f7e6ea;
             transition: transform 0.3s;
         }
         .payment-content {
             padding: 0 20px 20px 20px;
-            display: none; /* Oculto por defecto */
-            border-top: 1px dashed #4a1f2f;
-            margin-top: -10px;
-            padding-top: 15px;
+            display: none;
+            margin-top: -5px;
         }
         .payment-accordion.open .payment-content { display: block; }
         .payment-accordion.open .arrow-icon { transform: rotate(180deg); }
 
         .data-row {
+            padding: 12px 0;
+            border-bottom: 1px solid #3d1b28;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #3d1b28;
-            font-size: 0.95rem;
         }
-        .data-row:last-child { border-bottom: none; }
-        .data-label { color: #a8949a; font-size: 0.85rem; text-transform: uppercase; }
-        .data-value { color: #ffffff; font-weight: 600; font-family: monospace; text-align: right; }
+        .data-row:last-of-type { border-bottom: none; }
+        
+        .data-label { color: #a8949a; font-size: 0.8rem; margin-bottom: 4px; }
+        .data-value { color: #ffffff; font-weight: 600; font-size: 1rem; }
         
         .btn-copy {
-            background-color: #d84b72;
-            color: white;
-            border: none;
-            padding: 6px 12px;
+            background: none;
+            border: 1px solid #32c759;
+            color: #32c759;
+            padding: 6px 14px;
             border-radius: 8px;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             font-weight: bold;
             cursor: pointer;
-            margin-left: 10px;
-            transition: background 0.2s;
-            flex-shrink: 0;
+            transition: all 0.2s;
         }
-        .btn-copy:hover { background-color: #b83358; }
+        .btn-copy:active { background: rgba(50, 199, 89, 0.2); }
+        .helper-text { font-size: 0.85rem; color: #a8949a; margin-top: 15px; line-height: 1.4; }
 
-        .helper-text {
-            margin-top: 15px;
-            font-size: 0.85rem;
-            color: #8c767d;
-            font-style: italic;
-            text-align: center;
+        /* TARJETA DE SELLOS (FIDELIDAD) */
+        .loyalty-card {
+            background-color: #29111b;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .loyalty-title { font-size: 1.4rem; font-weight: 800; color: #f7e6ea; margin-bottom: 8px; font-family: 'Georgia', serif; }
+        .loyalty-subtitle { font-size: 0.95rem; color: #a8949a; margin-bottom: 20px; line-height: 1.4; }
+        
+        .stamps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px 10px;
+            margin-bottom: 20px;
+        }
+        .stamp {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 2px dashed #4a1f2f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #4a1f2f;
+        }
+        .stamp.active {
+            border: none;
+            background-color: #a6204c;
+            color: white;
+            box-shadow: 0 4px 10px rgba(166, 32, 76, 0.3);
+        }
+        
+        .btn-loyalty {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            background-color: #5c1830;
+            color: #f7e6ea;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+        .btn-reset {
+            width: 100%;
+            background: none;
+            border: 1px solid #4a1f2f;
+            color: #f7e6ea;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
         }
 
         /* Cuadrícula inferior estilo App Nativa */
@@ -253,41 +293,27 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 12px;
-            margin-top: 15px;
         }
         .action-btn {
-            background-color: #29111b;
-            border: 1px solid #3d1b28;
-            border-radius: 18px;
+            border-radius: 16px;
             padding: 16px 8px;
             text-align: center;
             text-decoration: none;
-            color: #f7e6ea;
-            font-size: 0.75rem;
+            color: #ffffff;
+            font-size: 0.8rem;
             font-weight: bold;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transition: all 0.2s;
         }
         .action-btn:active { transform: scale(0.95); }
         
-        /* Iconos vectoriales/emojis estilizados y más grandes */
-        .icon-circle {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            box-shadow: inset 0 2px 4px rgba(255,255,255,0.2);
-        }
-        .bg-pink { background: linear-gradient(135deg, #d84b72, #9e2349); }
-        .bg-blue { background: linear-gradient(135deg, #4da1ff, #1d72f3); }
+        .icon-wrapper { font-size: 1.5rem; }
+        .bg-pink { background: linear-gradient(180deg, #d84b72, #9e2349); }
+        .bg-blue { background: linear-gradient(180deg, #4da1ff, #1d72f3); }
         .bg-insta { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
         
         .footer {
@@ -337,51 +363,66 @@
                 <span class="subtitle">WhatsApp · Sucursal Lago Viedma</span>
             </a>
 
-            <!-- Acordeón de Pagos -->
+            <!-- Acordeón de Pagos con botones verdes -->
             <div class="payment-accordion" id="payAccordion">
                 <button class="payment-header" onclick="this.parentElement.classList.toggle('open')">
-                    <span><span class="icon-bank">🏦</span> Pagar por transferencia</span>
+                    <span>Pagar por transferencia</span>
                     <span class="arrow-icon">▼</span>
                 </button>
                 <div class="payment-content">
-                    <div class="data-row">
-                        <div>
-                            <div class="data-label">Banco</div>
-                            <div class="data-value">BBVA Bancomer</div>
-                        </div>
+                    <div class="data-row" style="flex-direction: column; align-items: flex-start;">
+                        <div class="data-label">Banco</div>
+                        <div class="data-value">BBVA Bancomer</div>
+                    </div>
+                    <div class="data-row" style="flex-direction: column; align-items: flex-start;">
+                        <div class="data-label">Titular</div>
+                        <div class="data-value">Edgar Ruiz</div>
                     </div>
                     <div class="data-row">
-                        <div style="flex-grow: 1;">
-                            <div class="data-label">CLABE Interbancaria</div>
+                        <div>
+                            <div class="data-label">CLABE</div>
                             <div class="data-value" id="clabeNum">012 180 01567975408 8</div>
                         </div>
                         <button class="btn-copy" onclick="copiarTexto('clabeNum', '¡CLABE copiada!');">Copiar</button>
                     </div>
-                    <div class="data-row">
-                        <div style="flex-grow: 1;">
-                            <div class="data-label">Beneficiario</div>
-                            <div class="data-value" id="beneficiario">Edgar Ruiz</div>
-                        </div>
-                        <button class="btn-copy" onclick="copiarTexto('beneficiario', '¡Nombre copiado!');">Copiar</button>
-                    </div>
                     <div class="helper-text">
-                        * Después de realizar tu transferencia, por favor envía tu comprobante por WhatsApp.
+                        Datos de ejemplo. Después de pagar, envía el comprobante por WhatsApp.
                     </div>
                 </div>
             </div>
 
+            <!-- TARJETA DE SELLOS NUEVA -->
+            <div class="loyalty-card">
+                <h2 class="loyalty-title">Tu tarjeta de sellos</h2>
+                <p class="loyalty-subtitle">Te faltan 7 visitas para tu café de regalo.</p>
+                
+                <div class="stamps-grid">
+                    <div class="stamp active">☕</div>
+                    <div class="stamp">☕</div>
+                    <div class="stamp">☕</div>
+                    <div class="stamp">☕</div>
+                    <div class="stamp">☕</div>
+                    <div class="stamp">☕</div>
+                    <div class="stamp">☕</div>
+                    <div class="stamp">🎁</div>
+                </div>
+
+                <button class="btn-loyalty">Hoy ya sellaste. ¡Vuelve pronto!</button>
+                <button class="btn-reset">Reiniciar demo</button>
+            </div>
+
             <!-- Cuadrícula inferior con iconos rediseñados -->
             <div class="action-grid">
-                <a href="https://maps.google.com" class="action-btn">
-                    <div class="icon-circle bg-pink">📍</div>
+                <a href="https://maps.google.com" class="action-btn bg-pink">
+                    <div class="icon-wrapper">📍</div>
                     <span>Ubicación y<br>sucursales</span>
                 </a>
-                <a href="https://search.google.com/local/writereview?placeid=PLACE_ID_AQUI" class="action-btn">
-                    <div class="icon-circle bg-blue">⭐</div>
+                <a href="https://search.google.com/local/writereview?placeid=PLACE_ID_AQUI" class="action-btn bg-blue">
+                    <div class="icon-wrapper">⭐</div>
                     <span>Califícanos<br>en Google</span>
                 </a>
-                <a href="https://instagram.com" class="action-btn">
-                    <div class="icon-circle bg-insta">📸</div>
+                <a href="https://instagram.com" class="action-btn bg-insta">
+                    <div class="icon-wrapper">📸</div>
                     <span>Síguenos en<br>Instagram</span>
                 </a>
             </div>
@@ -406,7 +447,6 @@
 
         document.getElementById('greeting-text').innerText = `${saludo}, mesa ${numMesa}`;
 
-        // Función para copiar datos específicos con aviso
         function copiarTexto(elementId, mensaje) {
             const texto = document.getElementById(elementId).innerText.replace(/\s/g, '');
             navigator.clipboard.writeText(texto).then(() => {
