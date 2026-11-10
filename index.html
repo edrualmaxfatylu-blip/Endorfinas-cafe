@@ -25,10 +25,22 @@
             box-shadow: 0 0 25px rgba(0,0,0,0.8);
         }
         
+        .top-bar {
+            background: linear-gradient(90deg, #6b1535, #9e2349, #6b1535);
+            padding: 12px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            border-bottom: 1px solid #9e2349;
+        }
+
         .banner {
             width: 100%;
             height: 190px;
-            background-image: url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1000&h=450&q=90');
+            background-image: url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1080&q=100');
             background-size: cover;
             background-position: center center;
             position: relative;
@@ -159,18 +171,12 @@
         }
         .btn-main:active { transform: scale(0.98); }
         
-        .btn-menu { 
-            background-color: #a6204c; 
-            color: white; 
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-        
         .btn-whatsapp { 
             background: linear-gradient(180deg, #32c759, #248a3d); 
             color: white; 
             flex-direction: column;
             gap: 4px;
+            box-shadow: 0 4px 15px rgba(50, 199, 89, 0.3);
         }
         .btn-whatsapp .title { font-size: 1.1rem; font-weight: 700; }
         .btn-whatsapp .subtitle { font-size: 0.8rem; font-weight: 400; opacity: 0.9; }
@@ -221,13 +227,13 @@
         .data-row:last-of-type { border-bottom: none; }
         
         .data-label { color: #a8949a; font-size: 0.8rem; margin-bottom: 4px; text-transform: uppercase; }
-        .data-value { color: #ffffff; font-weight: 600; font-size: 1rem; font-family: monospace; }
+        .data-value { color: #ffffff; font-weight: 600; font-size: 1.05rem; font-family: monospace; }
         
         .btn-copy {
             background: none;
             border: 1px solid #32c759;
             color: #32c759;
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: bold;
@@ -241,43 +247,55 @@
         /* Cuadrícula inferior */
         .action-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
             margin-top: 25px;
         }
         .action-btn {
             border-radius: 16px;
-            padding: 16px 8px;
+            padding: 18px 12px;
             text-align: center;
             text-decoration: none;
             color: #ffffff;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: bold;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transition: all 0.2s;
         }
         .action-btn:active { transform: scale(0.95); }
         
-        .icon-wrapper { font-size: 1.5rem; }
-        .bg-pink { background: linear-gradient(180deg, #d84b72, #9e2349); }
+        .icon-wrapper { font-size: 1.6rem; }
         .bg-blue { background: linear-gradient(180deg, #4da1ff, #1d72f3); }
         .bg-insta { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
         
         .footer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 35px;
+            padding: 20px;
+            border-top: 1px solid #381c26;
+        }
+        .footer-brand {
+            font-weight: bold;
+            color: #d84b72;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .footer-rights {
             font-size: 0.75rem;
-            color: #615055;
+            color: #7a666c;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
 
     <div class="app-container">
+        <div class="top-bar">✨ PORTAL DIGITAL EXCLUSIVO · MESAS</div>
         <div class="banner"></div>
         
         <div class="logo-wrapper">
@@ -305,10 +323,9 @@
             </div>
 
             <div class="section-title">
-                <span>☕ Menú & Pedidos</span>
+                <span>☕ Atención al Cliente</span>
             </div>
 
-            <a href="https://tusitio.com/menu" class="btn-main btn-menu">Ver menú digital</a>
             <a href="https://wa.me/525611107651" class="btn-main btn-whatsapp">
                 <span class="title">Pedir desde mi mesa</span>
                 <span class="subtitle">WhatsApp · Sucursal Lago Viedma</span>
@@ -317,7 +334,7 @@
             <!-- Acordeón de Pagos -->
             <div class="payment-accordion" id="payAccordion">
                 <button class="payment-header" onclick="this.parentElement.classList.toggle('open')">
-                    <span>🏦 Pagar por transferencia</span>
+                    <span>🏦 Método de Pago</span>
                     <span class="arrow-icon">▼</span>
                 </button>
                 <div class="payment-content">
@@ -331,7 +348,7 @@
                     </div>
                     <div class="data-row">
                         <div>
-                            <div class="data-label">CLABE</div>
+                            <div class="data-label">CLABE Interbancaria</div>
                             <div class="data-value" id="clabeNum">012 180 01567975408 8</div>
                         </div>
                         <button class="btn-copy" onclick="copiarTexto('clabeNum', '¡CLABE copiada!');">Copiar</button>
@@ -342,12 +359,12 @@
                 </div>
             </div>
 
-            <!-- Cuadrícula inferior -->
+            <div class="section-title" style="margin-top: 30px;">
+                <span>🌐 Redes Sociales</span>
+            </div>
+
+            <!-- Cuadrícula inferior simplificada -->
             <div class="action-grid">
-                <a href="https://maps.google.com" class="action-btn bg-pink">
-                    <div class="icon-wrapper">📍</div>
-                    <span>Ubicación y<br>sucursales</span>
-                </a>
                 <a href="https://search.google.com/local/writereview?placeid=PLACE_ID_AQUI" class="action-btn bg-blue">
                     <div class="icon-wrapper">⭐</div>
                     <span>Califícanos<br>en Google</span>
@@ -359,7 +376,11 @@
             </div>
             
             <div class="footer">
-                © Endorfina Chocolatería y Café | Portal digital
+                <div class="footer-brand">ZENITHKODE LABS</div>
+                <div class="footer-rights">
+                    © 2026 Endorfina Chocolatería y Café.<br>
+                    Arquitectura y diseño registrados. Prohibida su copia o distribución no autorizada.
+                </div>
             </div>
         </div>
     </div>
