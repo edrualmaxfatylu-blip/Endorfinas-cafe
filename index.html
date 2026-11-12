@@ -1,355 +1,237 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Endorfina Espresso · Sucursal Legaria</title>
-    <style>
-        :root {
-            --magenta-endorfina: #E2006A;
-            --rosa-claro: #FFB3D9;
-            --cafe-oscuro: #2A1118;
-            --fondo-app: #1A0A0F;
-            --fondo-tarjeta: #361720;
-            --texto-blanco: #FFFFFF;
-            --texto-gris: #E0C8D1;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        
-        body { 
-            background-color: #000; 
-            color: var(--texto-blanco); 
-            display: flex; 
-            justify-content: center; 
-            min-height: 100vh; 
-        }
-
-        .app-container { 
-            width: 100%; 
-            max-width: 480px; 
-            background-color: var(--fondo-app); 
-            min-height: 100vh; 
-            position: relative; 
-            box-shadow: 0 0 40px rgba(226, 0, 106, 0.15); 
-            overflow-x: hidden;
-        }
-
-        /* Banner y Encabezado */
-        .header {
-            background: linear-gradient(180deg, var(--magenta-endorfina) 0%, var(--cafe-oscuro) 100%);
-            padding: 40px 24px 30px 24px;
-            text-align: center;
-            border-bottom: 2px solid var(--magenta-endorfina);
-        }
-        
-        .brand-title {
-            font-size: 2.8rem;
-            font-weight: 300;
-            font-family: 'Georgia', serif;
-            letter-spacing: -1px;
-            color: #fff;
-            margin-bottom: 5px;
-        }
-        
-        .brand-subtitle {
-            font-family: 'Georgia', serif;
-            font-style: italic;
-            font-size: 1.5rem;
-            color: var(--rosa-claro);
-            margin-bottom: 15px;
-        }
-
-        .location-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            backdrop-filter: blur(5px);
-        }
-
-        .content { padding: 25px 20px 40px 20px; }
-
-        /* Botón de Cupones Destacado */
-        .btn-cupones {
-            background: linear-gradient(135deg, #FFD700, #F5A623);
-            color: #4A2E00;
-            padding: 18px;
-            border-radius: 16px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 20px rgba(245, 166, 35, 0.3);
-            border: 2px solid #FFF3B0;
-            animation: pulse-gold 2s infinite;
-        }
-        @keyframes pulse-gold {
-            0% { transform: scale(1); box-shadow: 0 8px 20px rgba(245, 166, 35, 0.3); }
-            50% { transform: scale(1.02); box-shadow: 0 12px 25px rgba(245, 166, 35, 0.5); }
-            100% { transform: scale(1); box-shadow: 0 8px 20px rgba(245, 166, 35, 0.3); }
-        }
-
-        /* Acordeones del Menú */
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            margin-top: 10px;
-        }
-        .section-header h3 { font-size: 1.2rem; font-weight: 700; color: var(--rosa-claro); text-transform: uppercase; letter-spacing: 1px; }
-
-        .menu-accordion {
-            background: var(--fondo-tarjeta);
-            border-radius: 16px;
-            margin-bottom: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(226, 0, 106, 0.3);
-        }
-        .menu-header {
-            width: 100%;
-            background: transparent;
-            color: var(--texto-blanco);
-            padding: 18px 20px;
-            border: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .menu-content {
-            padding: 0 20px 20px 20px;
-            display: none;
-        }
-        .menu-accordion.open .menu-content { display: block; }
-        .menu-accordion.open .arrow { transform: rotate(180deg); color: var(--magenta-endorfina); }
-        .arrow { transition: transform 0.3s; color: var(--texto-gris); }
-
-        .menu-item {
-            border-bottom: 1px dashed rgba(255,255,255,0.1);
-            padding: 12px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .menu-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .item-details h4 { font-size: 1rem; color: #fff; margin-bottom: 4px; }
-        .item-details p { font-size: 0.8rem; color: var(--texto-gris); line-height: 1.3; max-width: 220px; }
-        .item-price { font-weight: 800; color: var(--rosa-claro); font-size: 1.05rem; }
-
-        /* Tarjeta de Pago Banorte */
-        .payment-card {
-            background: linear-gradient(135deg, #EB0029, #9B001B); /* Tonos Banorte */
-            border-radius: 20px;
-            padding: 24px;
-            margin: 30px 0;
-            box-shadow: 0 10px 25px rgba(235, 0, 41, 0.3);
-            border: 1px solid #FF4D6D;
-        }
-        .payment-card h3 { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; margin-bottom: 20px; color: #fff; }
-        
-        .data-row { margin-bottom: 15px; }
-        .data-row:last-child { margin-bottom: 0; }
-        .data-row label { display: block; color: rgba(255,255,255,0.8); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 4px; }
-        .data-row .value-group { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 10px 15px; border-radius: 12px; }
-        .data-row .value { font-size: 1.1rem; font-weight: 700; font-family: monospace; color: #fff; letter-spacing: 1px; }
-        .data-row .text-value { font-size: 1rem; font-weight: 600; color: #fff; }
-        
-        .btn-copy {
-            background: #fff;
-            color: #EB0029;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 800;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-        .payment-note { font-size: 0.8rem; text-align: center; margin-top: 15px; color: rgba(255,255,255,0.9); font-style: italic; }
-
-        /* Botón WhatsApp */
-        .btn-wa {
-            background: #25D366;
-            color: white;
-            padding: 18px;
-            border-radius: 16px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        /* Redes Sociales Grid */
-        .social-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-        .social-btn {
-            background: #1877F2;
-            color: white;
-            padding: 16px;
-            border-radius: 12px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.75rem;
-            color: #8A6875;
-        }
-    </style>
-</head>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Endorfina espresso</title><meta name="theme-color" content="#801838">
+<meta name="description" content="Menú, pedidos por WhatsApp, pagos y más.">
+<meta property="og:type" content="website"><meta property="og:title" content="Endorfina espresso"><meta property="og:description" content="Menú, pedidos por WhatsApp, pagos y más.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%95%3C/text%3E%3C/svg%3E">
+<style>
+:root{--c:#801838;--c2:#5e1028;--bg:#f7ebec;--card:#fffafa;--ink:#2b1018;--mut:#7a5560;--line:#ecd0d4;--wa:#1f9d4c}
+@media (prefers-color-scheme:dark){:root{--card:#2b1219;--ink:#f7e9ea;--mut:#c4a1a9;--line:#47232d}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+main{max-width:480px;margin:0 auto;padding:0 18px 36px}
+a,button{font:inherit;-webkit-tap-highlight-color:transparent}:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+.hero{height:210px;margin:0 -18px;background:var(--c) center/cover;border-radius:0 0 30px 30px;box-shadow:inset 0 -60px 50px -30px rgba(94,16,40,.45)}
+.logo{display:grid;place-content:center;width:158px;height:158px;margin:-84px auto 0;border-radius:50%;background:var(--c);border:5px solid #fff;box-shadow:0 10px 26px rgba(0,0,0,.28);color:#fff;text-align:center;font-size:1.75rem;line-height:1.1;position:relative}
+.logo small{display:block;margin-top:3px;font:italic 1rem Georgia,serif;opacity:.92}
+h1{font:700 1.55rem/1.2 Georgia,serif;color:var(--c);text-align:center;margin:18px 0 0}
+.lema{text-align:center;color:var(--mut);margin:6px 0 0}
+.grp{border:1.5px dashed var(--mut);border-radius:26px;padding:4px 14px 8px;margin:24px 0 14px;min-width:0}
+.grp legend{display:flex;align-items:center;gap:8px;padding:0 10px;margin:0 auto;font:700 1.3rem Georgia,serif;color:var(--c)}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:58px;border-radius:999px;border:0;margin:8px 0;padding:10px 16px;color:#fff;text-decoration:none;font-weight:600;font-size:1.05rem;text-align:center;line-height:1.25;box-shadow:0 6px 14px rgba(0,0,0,.18);cursor:pointer;width:100%}
+.btn small{font-weight:400;font-size:.85rem;opacity:.92}
+.main{background:var(--c)}.wa{background:var(--wa)}
+.pay{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-bottom:14px;overflow:hidden}
+.pay>button{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;padding:16px;font-weight:600;cursor:pointer;color:var(--ink)}
+.pay .ic{transition:transform .2s}.pay.open .ic{transform:rotate(180deg)}
+.pay .body{display:none;padding:0 16px 8px}.pay.open .body{display:block}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.row span{display:block;font-size:.8rem;color:var(--mut)}.row b{font-weight:600;word-break:break-all}
+.copy{flex:none;border:1px solid var(--c);color:var(--c);background:none;border-radius:10px;padding:7px 12px;font-weight:600;font-size:.85rem;cursor:pointer}
+.copy.ok{background:var(--c);color:#fff}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:10px}
+.tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:106px;border-radius:22px;color:#fff;text-decoration:none;font-weight:600;font-size:.86rem;text-align:center;line-height:1.25;padding:10px 6px;box-shadow:0 6px 14px rgba(0,0,0,.16)}
+.tile .ic{width:30px;height:30px}
+.t1{background:var(--c)}.t2{background:var(--c2)}.t3{background:linear-gradient(45deg,var(--c2),var(--c) 55%,#b8365f)}
+footer{text-align:center;color:var(--mut);font-size:.8rem;margin-top:26px}
+.alt{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.demo{display:inline-block;margin-top:10px;padding:3px 12px;border:1px solid var(--mut);color:var(--mut);border-radius:999px;font-size:.78rem;font-weight:600}
+.ticket{position:relative;margin:20px 4px 0;background:var(--card);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:16px;box-shadow:0 8px 24px rgba(43,16,24,.14)}
+.ticket::before,.ticket::after{content:"";position:absolute;left:96px;width:20px;height:20px;border-radius:50%;background:var(--bg)}
+.ticket::before{top:-10px}.ticket::after{bottom:-10px}
+.num{width:64px;text-align:center;padding-right:16px;border-right:2px dashed var(--line);margin-right:4px}
+.num b{display:block;font:700 2.4rem/1 Georgia,serif;color:var(--c)}.num span{font-size:.78rem;color:var(--mut)}
+.ticket strong{display:block;font-size:1.05rem}.ticket p{margin:0;font-size:.92rem;color:var(--mut)}
+.ticket select{margin-top:6px;background:transparent;border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:.8rem;color:var(--mut)}
+.tabs{display:flex;gap:6px;margin:22px 0 4px;background:var(--card);padding:5px;border-radius:14px;border:1px solid var(--line)}
+.tabs button{flex:1;border:0;background:none;padding:10px 4px;border-radius:10px;font-weight:600;font-size:.95rem;cursor:pointer;color:var(--mut)}
+.tabs button[aria-selected="true"]{background:var(--c);color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:18px}
+.card h2{font:700 1.4rem Georgia,serif;margin:0}.card .sub{color:var(--mut);margin:6px 0 16px}
+.stars{display:flex;justify-content:space-between;margin:6px 0 4px}.stars button{background:none;border:0;padding:4px;cursor:pointer;width:20%}
+.stars svg{width:100%;max-width:52px;fill:none;stroke:#c08a4e;stroke-width:1.6;stroke-linejoin:round;transition:transform .15s,fill .15s}
+.stars button.on svg{fill:#c08a4e}.stars button:active svg{transform:scale(.88)}
+.label{text-align:center;min-height:1.5em;font-weight:600;color:var(--c);margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.chips button{border:1px solid var(--line);background:none;border-radius:999px;padding:8px 14px;cursor:pointer;font-size:.92rem;color:var(--ink)}
+.chips button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff}
+textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:14px;background:transparent;color:var(--ink);padding:12px;font:inherit;resize:vertical;margin-bottom:12px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}.thanks{text-align:center}
+/* ---- Mejoras de diseño ---- */
+:root{--sh:0 8px 22px rgba(94,16,40,.16)}
+body{background:radial-gradient(120% 55% at 50% 0,rgba(128,24,56,.09),transparent 62%),var(--bg)}
+.hero{filter:saturate(1.1) contrast(1.04);box-shadow:inset 0 -70px 60px -30px rgba(94,16,40,.55),0 14px 32px -14px rgba(94,16,40,.4)}
+.logo{box-shadow:0 14px 30px rgba(94,16,40,.38),0 0 0 7px rgba(255,255,255,.3);letter-spacing:.02em}
+.logo::after{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.35);border-radius:50%;pointer-events:none}
+h1{text-wrap:balance;letter-spacing:-.01em}
+.grp{background:var(--card);box-shadow:var(--sh)}
+.btn{position:relative;transition:transform .15s,box-shadow .2s,filter .2s}
+.btn:active,.tile:active{transform:scale(.97)}
+.btn:hover,.tile:hover{filter:brightness(1.06)}
+.main{background:linear-gradient(135deg,var(--c),var(--c2) 150%)}
+.wa{background:linear-gradient(135deg,#27b45d,#16883f)}
+.btn.main::before,.btn.wa::before{content:"";position:absolute;left:22px;top:50%;width:26px;height:26px;transform:translateY(-50%);opacity:.95}
+.btn.main::before{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 5v16M9 8h6'/%3E%3C/svg%3E") center/contain no-repeat}
+.btn.wa::before{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 5h16v11H9l-5 4z'/%3E%3C/svg%3E") center/contain no-repeat}
+.tile{transition:transform .15s,filter .2s;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 8px 18px rgba(94,16,40,.2)}
+.pay{box-shadow:0 4px 14px rgba(94,16,40,.08)}
+.tabs button{transition:background .2s,color .2s}
+.chips button{transition:background .15s,color .15s,transform .15s}.chips button:active{transform:scale(.95)}
+.stars button.on svg{animation:pop .3s}
+footer::before{content:"\2615";display:block;font-size:1.3rem;margin-bottom:6px;opacity:.7}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pop{50%{transform:scale(1.22)}}
+.logo,h1,.lema,.ticket,.tabs,#vInicio>*{animation:up .6s cubic-bezier(.2,.7,.2,1) backwards}
+h1{animation-delay:.08s}.lema{animation-delay:.14s}.ticket{animation-delay:.2s}.tabs{animation-delay:.24s}
+#vInicio>:nth-child(1){animation-delay:.28s}#vInicio>:nth-child(2){animation-delay:.36s}#vInicio>:nth-child(3){animation-delay:.44s}
+#vOpina:not([hidden]){animation:up .35s ease backwards}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.vw{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.vh{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.vh b{flex:1;font:700 1.15rem Georgia,serif}.vh button{border:0;background:var(--c);color:#fff;border-radius:999px;padding:8px 18px;font-weight:600;cursor:pointer}
+.vt{display:flex;gap:6px;padding:8px 14px;overflow-x:auto;scrollbar-width:none}.vt button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;font-weight:600;font-size:.88rem;cursor:pointer}
+.vt button[aria-selected="true"]{background:var(--c);border-color:var(--c);color:#fff}
+.vn{font-size:.78rem;color:var(--mut);text-align:center;padding:2px 0 6px}
+.vs{flex:1;overflow:auto;-webkit-overflow-scrolling:touch}.vs img{display:block;width:100%;height:auto;min-height:60vh}.vs.z img{width:230%;max-width:none}
+.loy{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:16px 18px;border-radius:20px;background:linear-gradient(135deg,var(--c),var(--c2));color:#fff;text-decoration:none;box-shadow:var(--sh);transition:transform .15s}
+.loy:active{transform:scale(.98)}.loy .ic{width:30px;height:30px;flex:none}.loy div{flex:1;line-height:1.3}.loy b{display:block;font-size:1.05rem}.loy span{font-size:.86rem;opacity:.88}.loy i{font-style:normal;font-size:1.3rem}
+.t4{background:linear-gradient(135deg,var(--c),var(--c2))}
+</style></head>
 <body>
+<main>
+<header class="hero" id="hero" role="img" aria-label="Portada"></header>
+<div class="logo"><span id="lN"></span><small id="lS"></small></div>
+<h1 id="t"></h1><p class="lema" id="lema"></p>
+<p class="lema" id="hor" style="font-size:.88rem;margin-top:2px"></p>
+<div style="text-align:center"><span class="demo" id="demo" hidden>Versión de demostración</span></div>
+<section class="ticket" id="ticket" hidden><div class="num"><b id="mn"></b><span>mesa</span></div><div><strong id="greet"></strong><p>Pide, paga y cuéntanos cómo va todo desde aquí.</p><select id="mesaSel" hidden aria-label="Cambiar mesa (demo)"></select></div></section>
+<nav class="tabs" id="tabs" role="tablist" hidden><button role="tab" aria-selected="true" data-v="vInicio" id="tabI">Mi mesa</button><button role="tab" aria-selected="false" data-v="vOpina">Opinar</button></nav>
+<section id="vInicio">
+<fieldset class="grp" id="grp"><legend><svg class="ic" viewBox="0 0 24 24"><path d="M4 9h12v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM16 10h2a2.5 2.5 0 0 1 0 5h-2M3 21h14"/></svg><span id="sec"></span></legend>
+<a class="btn main" id="bMenu" target="_blank" rel="noopener">Ver menú digital</a>
+<a class="btn wa" id="bWa" target="_blank" rel="noopener">Pedir por WhatsApp<small id="waS"></small></a></fieldset>
+<a class="loy" id="loy" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/></svg><div><b>Tarjeta de lealtad</b><span>Agrégala a tu teléfono. Sin apps, cada visita cuenta.</span></div><i>→</i></a>
+<div class="pay" id="pay" hidden><button aria-expanded="false"><span>Pagar por transferencia</span><svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button><div class="body" id="payB"></div></div>
+<div class="tiles">
+<a class="tile t1" id="tMap" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Ubicación y sucursales</a>
+<a class="tile t2" id="tRes" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" style="fill:#fbbc04;stroke:#fbbc04"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg>Califícanos en Google</a>
+<a class="tile t3" id="tIg" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></svg>Síguenos en Instagram</a>
+<a class="tile t4" id="tFb" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V9H6v4h3v8h4v-8h3l1-4h-4V6.5c0-.3.2-.5.5-.5H15z"/></svg>Síguenos en Facebook</a>
+</div>
+</section>
+<section id="vOpina" hidden>
+<div class="card" id="fbForm"><h2>¿Cómo va tu visita?</h2><p class="sub">Toma 10 segundos. Si algo no está bien, lo resolvemos en tu mesa.</p>
+<div class="stars" id="stars" role="radiogroup" aria-label="Calificación"></div><p class="label" id="lbl" aria-live="polite"></p>
+<div class="chips" id="chips"></div><textarea id="cm" placeholder="¿Algo que quieras contarnos? (opcional)"></textarea>
+<button class="btn main" id="send" disabled style="margin:0">Enviar opinión</button></div>
+<div class="card thanks" id="fbDone" hidden></div>
+</section>
+<footer id="pie"></footer>
+</main>
+<div class="vw" id="vw" hidden><div class="vh"><b>Menú</b><button id="vx">Cerrar</button></div><div class="vt" id="vt" role="tablist"></div><div class="vn">Toca la imagen para acercar</div><div class="vs" id="vs"></div></div>
+<script>
+// ============ CONFIGURACIÓN: lo único que se edita por cliente ============
+const CONFIG={
+ nombre:"Endorfina", subtitulo:"espresso",
+ titulo:"Endorfina espresso", lema:"Un espacio para consentirte",
+ color:"#801838", color2:"#5e1028", fondo:"#f7ebec",
+ colorOscuro:"#b32552", color2Oscuro:"#801838", fondoOscuro:"#1d0a11",   // modo oscuro del teléfono
+ foto:"data:image/webp;base64,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",                    // ruta (foto.webp) o imagen incrustada
+ seccion:"Menú & Pedidos",
+ menu:"#menu",
+ menuImagenes:[["Desayunos","9 a 13 h","menu-desayunos.webp"],["Comidas y cenas","13 h al cierre","menu-comidas.webp"],["Bebidas y crepas","","menu-bebidas.webp"]],
+ lealtad:"https://app.luyoa.com/enroll/endorfina",   // tarjeta de lealtad (vacío = oculta)
+ horarioTexto:"Desayunos de 9 a 13 h · Comidas y cenas de 13 h al cierre",     // vacío "" = oculta el botón
+ whatsapp:{numero:"525547614263", etiqueta:"Calzada Legaria #63", mensaje:"Hola, quisiera hacer un pedido:"},
+ pago:{banco:"Banorte", titular:"Claudia Hernandez", cuentaEtiqueta:"CLABE", cuenta:"072180010818090894", alias:"", nota:"En concepto, anota tu nombre. Después de pagar, envía tu comprobante por WhatsApp."},
+ mapa:"https://share.google/7yuF8uY5CEKJ8oBgc",
+ resena:"https://share.google/7yuF8uY5CEKJ8oBgc",
+ instagram:"",
+ facebook:"https://www.facebook.com/share/1TuXLpxRKK/",
+ pie:"© Endorfina espresso | Portal digital",
+ demo:false,                              // true = muestra "demostración" y selector de mesa; ponlo en false al entregar
+ mesaMax:12,                             // solo para el selector de la demo
+ opiniones:{}    // a este WhatsApp llegan las opiniones de 3 estrellas o menos. Vacío ({}) = oculta Opinar
+};
+// ============================================================================
+(function(){
+var C=CONFIG,$=function(s){return document.querySelector(s)},R=document.documentElement.style;
+var dk=window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches;
+document.title=C.titulo;R.setProperty("--c",dk&&C.colorOscuro?C.colorOscuro:C.color);R.setProperty("--c2",dk&&C.color2Oscuro?C.color2Oscuro:(C.color2||C.color));R.setProperty("--bg",dk&&C.fondoOscuro?C.fondoOscuro:C.fondo);
+document.querySelector('meta[name=theme-color]').content=C.color;
+if(C.foto)$("#hero").style.backgroundImage='url("'+C.foto+'")';
+$("#lN").textContent=C.nombre;$("#lS").textContent=C.subtitulo;
+$("#t").textContent=C.titulo;$("#lema").textContent=C.lema;$("#sec").textContent=C.seccion;$("#pie").textContent=C.pie;
+function L(el,h){if(h)el.href=h;else el.hidden=true}
+L($("#bMenu"),C.menu);
+var w=C.whatsapp;
+if(w&&w.numero){$("#bWa").href="https://wa.me/"+w.numero+"?text="+encodeURIComponent(w.mensaje||"");if(w.etiqueta)$("#waS").textContent="("+w.etiqueta+")"}else $("#bWa").hidden=true;
+if($("#bMenu").hidden&&$("#bWa").hidden)$("#grp").hidden=true;
+L($("#loy"),C.lealtad);L($("#tFb"),C.facebook);L($("#tMap"),C.mapa);L($("#tRes"),C.resena);L($("#tIg"),C.instagram);
+var p=C.pago;
+if(p){var rows=[["Banco",p.banco],["Titular",p.titular],[p.cuentaEtiqueta||"Cuenta",p.cuenta,1],["Alias",p.alias,1]],h="",any=0;
+ rows.forEach(function(r){if(!r[1])return;any=1;var d=document.createElement("div");d.className="row";
+  var i=document.createElement("div"),s=document.createElement("span"),b=document.createElement("b");
+  s.textContent=r[0];b.textContent=r[1];i.appendChild(s);i.appendChild(b);d.appendChild(i);
+  if(r[2]){var k=document.createElement("button");k.className="copy";k.textContent="Copiar";k.onclick=function(){copy(r[1],k)};d.appendChild(k)}
+  $("#payB").appendChild(d)});
+ if(any){if(p.nota){var n=document.createElement("p");n.textContent=p.nota;n.style.cssText="margin:10px 0 4px;color:var(--mut);font-size:.88rem";$("#payB").appendChild(n)}
+ if(w&&w.numero){var a=document.createElement("a");a.className="btn wa";a.target="_blank";a.rel="noopener";a.textContent="Enviar comprobante por WhatsApp";a.href="https://wa.me/"+w.numero+"?text="+encodeURIComponent("Hola, te envío mi comprobante de transferencia. Mi nombre: ");a.style.margin="6px 0 12px";$("#payB").appendChild(a)}
+ $("#pay").hidden=false}}
+$("#pay>button").onclick=function(){var o=$("#pay").classList.toggle("open");this.setAttribute("aria-expanded",o)};
+function copy(t,k){function ok(){k.textContent="Copiado";k.classList.add("ok");setTimeout(function(){k.textContent="Copiar";k.classList.remove("ok")},1600)}
+ function fb(){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove();ok()}
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,fb);else fb()}
 
-    <div class="app-container">
-        
-        <div class="header">
-            <h1 class="brand-title">Endorfina</h1>
-            <h2 class="brand-subtitle">espresso</h2>
-            <div class="location-badge">📍 Calzada Legaria #63</div>
-        </div>
+// ---- Mesa (viene en el enlace de cada tarjeta: ...#mesa-5) ----
+var mesa=0,hasO=!!(C.opiniones&&C.opiniones.whatsapp);
+function rd(){var m=(location.hash||"").match(/^#mesa-(\d{1,3})$/);mesa=m?+m[1]:(C.demo?5:0)}
+function pm(){
+ $("#ticket").hidden=!mesa;$("#tabs").hidden=!hasO;$("#tabI").textContent=mesa?"Mi mesa":"Inicio";
+ if(mesa){$("#mn").textContent=mesa;var hr=new Date().getHours();$("#greet").textContent=(hr<12?"Buenos días":hr<19?"Buenas tardes":"Buenas noches")+", mesa "+mesa;$("#mesaSel").value=mesa}
+ if(w&&w.numero){$("#bWa").href="https://wa.me/"+w.numero+"?text="+encodeURIComponent((mesa?"Hola, soy de la mesa "+mesa+". ":"")+(w.mensaje||""));$("#bWa").firstChild.nodeValue=mesa?"Pedir desde mi mesa":"Pedir por WhatsApp"}
+}
+if(C.demo){$("#demo").hidden=false;var sl=$("#mesaSel");sl.hidden=false;for(var i=1;i<=(C.mesaMax||12);i++){var o=document.createElement("option");o.value=i;o.textContent="Mesa "+i+" (demo)";sl.appendChild(o)}
+ sl.onchange=function(){mesa=+sl.value;try{history.replaceState(null,"","#mesa-"+mesa)}catch(e){}pm();reset()}}
+rd();pm();window.addEventListener("hashchange",function(){rd();pm()});
 
-        <div class="content">
-            
-            <!-- Botón de Cupones -->
-            <a href="https://share.google/MULsZgTHa3vlZqJQF" target="_blank" class="btn-cupones">
-                🎟️ Obtén tus Cupones Especiales
-            </a>
+// ---- Pestañas ----
+document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){
+ document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-selected",x===b)});
+ $("#vInicio").hidden=b.dataset.v!=="vInicio";$("#vOpina").hidden=b.dataset.v!=="vOpina"}});
 
-            <!-- Menú Digital Interactivo -->
-            <div class="section-header">
-                <h3>📖 Menú Digital</h3>
-            </div>
+// ---- Opinar: no guarda nada; las quejas llegan por WhatsApp, lo bueno va a Google ----
+var rating=0,tags=[],LB=["","Hay que mejorar","Regular","Bien","Muy bien","Excelente"],TG=["Atención","Rapidez","Sabor","Ambiente","Limpieza","Precio"];
+var STAR='<svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2 6.3 20.3l1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
+for(var s=1;s<=5;s++){var sb=document.createElement("button");sb.innerHTML=STAR;sb.setAttribute("role","radio");sb.setAttribute("aria-label",s+" de 5: "+LB[s]);sb.dataset.v=s;
+ sb.onclick=function(){rating=+this.dataset.v;paintS()};$("#stars").appendChild(sb)}
+function paintS(){document.querySelectorAll("#stars button").forEach(function(b){b.classList.toggle("on",+b.dataset.v<=rating);b.setAttribute("aria-checked",+b.dataset.v===rating)});
+ $("#lbl").textContent=LB[rating];$("#send").disabled=!rating;
+ $("#cm").placeholder=rating&&rating<=3?"Cuéntanos qué pasó para resolverlo ahora":"¿Algo que quieras contarnos? (opcional)"}
+TG.forEach(function(t){var b=document.createElement("button");b.textContent=t;b.setAttribute("aria-pressed","false");
+ b.onclick=function(){var i=tags.indexOf(t);if(i<0)tags.push(t);else tags.splice(i,1);b.setAttribute("aria-pressed",i<0)};$("#chips").appendChild(b)});
+function reset(){rating=0;tags=[];$("#cm").value="";paintS();document.querySelectorAll("#chips button").forEach(function(b){b.setAttribute("aria-pressed","false")});$("#fbForm").hidden=false;$("#fbDone").hidden=true}
+$("#send").onclick=function(){
+ var c=$("#cm").value.trim(),d=$("#fbDone"),h;
+ if(rating>=4){h='<h2>¡Gracias, nos alegra!</h2><p class="sub">Tu opinión nos ayuda mucho. ¿Nos regalas una reseña pública? Toma un minuto.</p>'+(C.resena?'<a class="btn main" href="'+C.resena+'" target="_blank" rel="noopener">Calificarnos en Google</a>':'')+'<button class="btn alt" id="again">Volver</button>'}
+ else{var msg=(mesa?"Hola, soy de la mesa "+mesa+". ":"Hola. ")+"Calificación: "+rating+"/5."+(tags.length?" Tema: "+tags.join(", ")+".":"")+(c?" Comentario: "+c:"");
+  h='<h2>Gracias por decirnos</h2><p class="sub">Lamentamos que no haya sido perfecto. Avisa al equipo y te atendemos ahora mismo.</p><a class="btn wa" href="https://wa.me/'+C.opiniones.whatsapp+'?text='+encodeURIComponent(msg)+'" target="_blank" rel="noopener">Hablar con el encargado<small>WhatsApp</small></a><button class="btn alt" id="again">Volver</button>'}
+ d.innerHTML=h;$("#fbForm").hidden=true;d.hidden=false;
+ $("#again").onclick=function(){reset();document.querySelector('.tabs button[data-v="vInicio"]').click()}};
+paintS();
 
-            <div class="menu-accordion">
-                <button class="menu-header" onclick="this.parentElement.classList.toggle('open')">
-                    <span>🍳 Desayunos (9 a 13 hrs)</span>
-                    <span class="arrow">▼</span>
-                </button>
-                <div class="menu-content">
-                    <div class="menu-item">
-                        <div class="item-details">
-                            <h4>Desayuno Promoción</h4>
-                            <p>Chilaquiles sencillos o Huevos al gusto + Café americano.</p>
-                        </div>
-                        <div class="item-price">$99</div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-details">
-                            <h4>Enchiladas Clásicas</h4>
-                            <p>Rellenas de pollo bañadas en nuestras salsas con queso y crema.</p>
-                        </div>
-                        <div class="item-price">$119</div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-details">
-                            <h4>Molletes</h4>
-                            <p>Doraditos, con frijoles refritos y queso gratinado.</p>
-                        </div>
-                        <div class="item-price">$79</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-accordion">
-                <button class="menu-header" onclick="this.parentElement.classList.toggle('open')">
-                    <span>🍝 Comidas y Cenas</span>
-                    <span class="arrow">▼</span>
-                </button>
-                <div class="menu-content">
-                    <div class="menu-item">
-                        <div class="item-details">
-                            <h4>Sopa de Tortilla</h4>
-                            <p>Tradicional mexicana, de tomate con juliana de tortilla frita.</p>
-                        </div>
-                        <div class="item-price">$89</div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-details">
-                            <h4>Ensalada del Chef</h4>
-                            <p>Mezcla fresca de lechugas, jamón, queso, frutas, nuez y aderezo.</p>
-                        </div>
-                        <div class="item-price">$89</div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-details">
-                            <h4>Lasagna 4 Quesos</h4>
-                            <p>Deliciosa combinación de carne molida angus con quesos.</p>
-                        </div>
-                        <div class="item-price">$198</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-accordion">
-                <button class="menu-header" onclick="this.parentElement.classList.toggle('open')">
-                    <span>☕ Bebidas y Repostería</span>
-                    <span class="arrow">▼</span>
-                </button>
-                <div class="menu-content">
-                    <div class="menu-item">
-                        <div class="item-details">
-                            <h4>Xocolate Dulce (Caliente)</h4>
-                            <p>Con cacao natural. Tamaño chico.</p>
-                        </div>
-                        <div class="item-price">$59</div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-details">
-                            <h4>Pastel de la casa</h4>
-                            <p>Prueba nuestra repostería horneada en Endorfina.</p>
-                        </div>
-                        <div class="item-price">$74</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Módulo de Pago Transferencia -->
-            <div class="payment-card">
-                <h3>💳 Transferencia Bancaria</h3>
-                <div class="data-row">
-                    <label>Banco / Beneficiaria</label>
-                    <div class="text-value">BANORTE - Claudia Hernandez</div>
-                </div>
-                <div class="data-row" style="margin-top: 15px;">
-                    <label>CLABE Interbancaria</label>
-                    <div class="value-group">
-                        <span class="value">072180010818090894</span>
-                        <button class="btn-copy" onclick="copiarInfo('072180010818090894')">Copiar</button>
-                    </div>
-                </div>
-                <p class="payment-note">En concepto favor de anotar su nombre. Envíe su comprobante al WhatsApp.</p>
-            </div>
-
-            <!-- Botones de Acción -->
-            <a href="https://wa.me/525547614263" class="btn-wa">
-                💬 Enviar Comprobante / Pedir
-            </a>
-
-            <div class="social-grid">
-                <a href="https://www.facebook.com/Endorfinacafe" target="_blank" class="
+// ---- Menú en imágenes (carga solo al abrirlo) ----
+var VI=C.menuImagenes||[],vi=0;
+if(C.horarioTexto)$("#hor").textContent=C.horarioTexto;else $("#hor").hidden=true;
+function vshow(i){vi=i;document.querySelectorAll("#vt button").forEach(function(b,j){b.setAttribute("aria-selected",j===i)});var s=$("#vs");s.className="vs";s.textContent="";var im=new Image();im.alt=VI[i][0];im.src=VI[i][2];s.appendChild(im);s.scrollTo(0,0)}
+function vopen(){$("#vw").hidden=false;document.body.style.overflow="hidden";vshow(vi)}
+function vclose(){$("#vw").hidden=true;document.body.style.overflow=""}
+VI.forEach(function(v,i){var b=document.createElement("button");b.textContent=v[0]+(v[1]?" · "+v[1]:"");b.setAttribute("role","tab");b.onclick=function(){vshow(i)};$("#vt").appendChild(b)});
+$("#bMenu").addEventListener("click",function(e){if(VI.length){e.preventDefault();vopen()}});
+$("#vx").onclick=vclose;$("#vs").onclick=function(){this.classList.toggle("z")};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")vclose()});
+if(location.hash==="#menu"&&VI.length)vopen();
+})();
+</script>
+</body></html>
